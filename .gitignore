@@ -188,5 +188,5 @@ pyvenv.cfg
 pip-selfcheck.json
 
 .vscode/
-datasets/
-test.py
+
+Data/
