@@ -1,36 +1,18 @@
 from .base import AbstractDataloader
-from .negative_samplers import negative_sampler_factory
 
 import torch
 import torch.utils.data as data_utils
 
 
-class BertDataloader(AbstractDataloader):
+class VAEDataloader(AbstractDataloader):
     def __init__(self, args, dataset):
         super().__init__(args, dataset)
-        self.max_len = args.bert_max_len
-        self.mask_prob = args.bert_mask_prob
-        self.CLOZE_MASK_TOKEN = self.item_count + 1
-
-        code = args.train_negative_sampler_code
-        train_negative_sampler = negative_sampler_factory(code, self.train, self.val, self.test,
-                                                          self.user_count, self.item_count,
-                                                          args.train_negative_sample_size,
-                                                          args.train_negative_sampling_seed,
-                                                          save_folder)
-        code = args.test_negative_sampler_code
-        test_negative_sampler = negative_sampler_factory(code, self.train, self.val, self.test,
-                                                         self.user_count, self.item_count,
-                                                         args.test_negative_sample_size,
-                                                         args.test_negative_sampling_seed,
-                                                         save_folder)
-
-        self.train_negative_samples = train_negative_sampler.get_negative_samples()
-        self.test_negative_samples = test_negative_sampler.get_negative_samples()
+        self.max_len = args.vae_max_len
+        self.mask_prob = args.vae_mask_prob
 
     @classmethod
     def code(cls):
-        return 'bert'
+        return 'vae'
 
     def get_pytorch_dataloaders(self):
         train_loader = self._get_train_loader()

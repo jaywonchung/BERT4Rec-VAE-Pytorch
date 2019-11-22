@@ -5,7 +5,7 @@ from utils import AverageMeterSet
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 from abc import *

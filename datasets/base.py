@@ -129,8 +129,8 @@ class AbstractDataset(metaclass=ABCMeta):
 
     def densify_index(self, df):
         print('Densifying index')
-        umap = {u: (i+1) for i, u in enumerate(set(df['uid']))}
-        smap = {s: (i+1) for i, s in enumerate(set(df['sid']))}
+        umap = {u: i for i, u in enumerate(set(df['uid']))}
+        smap = {s: i for i, s in enumerate(set(df['sid']))}
         df['uid'] = df['uid'].map(umap)
         df['sid'] = df['sid'].map(smap)
         return df, umap, smap
@@ -141,10 +141,12 @@ class AbstractDataset(metaclass=ABCMeta):
             user_group = df.groupby('uid')
             user2items = user_group.progress_apply(lambda d: list(d.sort_values(by='timestamp')['sid']))
             train, val, test = {}, {}, {}
-            for user in range(1, user_count+1):
+            for user in range(user_count):
                 items = user2items[user]
                 train[user], val[user], test[user] = items[:-2], items[-2:-1], items[-1:]
             return train, val, test
+        elif self.args.aplit == 'holdout':
+            print('Splitting')
         else:
             raise NotImplementedError
 
