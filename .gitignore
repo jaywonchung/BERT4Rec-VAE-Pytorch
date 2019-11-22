@@ -190,3 +190,4 @@ pip-selfcheck.json
 .vscode/
 
 Data/
+experiments/
