@@ -13,7 +13,7 @@ class BERT(nn.Module):
         # self.init_weights()
 
         max_len = args.bert_max_len
-        num_items = args.bert_num_items
+        num_items = args.num_items
         n_layers = args.bert_num_blocks
         heads = args.bert_num_heads
         vocab_size = num_items + 2

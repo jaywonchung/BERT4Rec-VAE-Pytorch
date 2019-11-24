@@ -40,24 +40,3 @@ def filter_triplets(tp, min_uc=5, min_sc=0):
     usercount, itemcount = get_count(tp, 'userId'), get_count(tp, 'movieId')
     return tp, usercount, itemcount
 
-
-def split_train_test_proportion(data, test_prop=0.2):
-    data_grouped_by_user = data.groupby('userId')
-    tr_list, te_list = list(), list()
-
-    for i, (_, group) in tqdm(enumerate(data_grouped_by_user), total=len(data_grouped_by_user)):
-        n_items_u = len(group)
-
-        if n_items_u >= 5:
-            idx = np.zeros(n_items_u, dtype='bool')
-            idx[np.random.choice(n_items_u, size=int(test_prop * n_items_u), replace=False).astype('int64')] = True
-
-            tr_list.append(group[np.logical_not(idx)])
-            te_list.append(group[idx])
-        else:
-            tr_list.append(group)
-
-    data_tr = pd.concat(tr_list)
-    data_te = pd.concat(te_list)
-
-    return data_tr, data_te

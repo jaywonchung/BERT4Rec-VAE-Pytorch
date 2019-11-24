@@ -8,6 +8,7 @@ import torch.utils.data as data_utils
 class BertDataloader(AbstractDataloader):
     def __init__(self, args, dataset):
         super().__init__(args, dataset)
+        args.num_items = len(self.smap)
         self.max_len = args.bert_max_len
         self.mask_prob = args.bert_mask_prob
         self.CLOZE_MASK_TOKEN = self.item_count + 1
