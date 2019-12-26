@@ -1,3 +1,13 @@
+# Introduction
+
+This repository implements models from the following two papers:
+
+> **BERT4Rec: Sequential Recommendation with BERT (Sun et al.)**  
+
+> **Variational Autoencoders for Collaborative Filtering (Liang et al.)**  
+
+and lets you train them on MovieLens-1m and MovieLens-20m.
+
 # Usage
 
 Basically, you run `main.py` to train your model. There are predefined templates: `train_bert`, `train_dae`, `train_vae_search_beta`, and `train_vae_give_beta`. `main.py` will ask you which dataset to train on (ML-1m or ML-20m) and whether to run test set inference (y/n) for the current run at the end of training.
