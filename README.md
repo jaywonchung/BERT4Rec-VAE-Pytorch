@@ -10,20 +10,70 @@ and lets you train them on MovieLens-1m and MovieLens-20m.
 
 # Usage
 
-Basically, you run `main.py` to train your model. There are predefined templates: `train_bert`, `train_dae`, `train_vae_search_beta`, and `train_vae_give_beta`. `main.py` will ask you which dataset to train on (ML-1m or ML-20m) and whether to run test set inference (y/n) for the current run at the end of training.
+## Overall
 
-Here are a few examples that will help you grasp the usage.
+Run `main.py` with arguments to train and/or test you model. There are predefined templates for the following modes.
 
-### Train BERT4Rec on ML-20m and run test set inference after training
+On running `main.py`, it asks you whether to train on MovieLens-1m or MovieLens-20m. (1/20)
 
-```bash
-printf '20\ny\n' | python main.py --template train_bert
-```
+After training, it also asks you whetehr to run test set evaluation on the trained model. (y/n)
 
-### Search for optimal beta for VAE on ML-1m and do not run test set inference
+## BERT4Rec
 
 ```bash
-printf '1\nn\n' | python main.py --template train_vae_search_beta
+python main.py --template train_bert
 ```
 
-Note that for `train_vae_give_beta`, you must specify the optimal beta value in `templates.py`.
+## DAE
+
+```bash
+python main.py --template train_dae
+```
+
+## VAE
+
+### Search for the optimal beta
+
+```bash
+python main.py --template train_vae_search_beta
+```
+
+### Use the found optimal beta
+
+First, **fill out the optimal beta value in `templates.py`**. Then, run the following.
+
+``` bash
+python main.py --template train_vae_give_beta
+```
+
+<img src=Images/vae_tensorboard.png width=800>
+
+The `Best_beta` plot will help you determine the optimal beta value. It can be seen that the optimal beta value is 0.285.
+
+The gray graph in the `Beta` plot was trained by fixing the beta value to 0.285.
+
+The `NDCG_10` metric shows that the improvement claimed by the paper has been reproduced.
+
+## Examples
+
+1. Train BERT4Rec on ML-20m and run test set inference after training
+
+   ```bash
+   printf '20\ny\n' | python main.py --template train_bert
+   ```
+
+2. Search for optimal beta for VAE on ML-1m and do not run test set inference
+
+   ```bash
+   printf '1\nn\n' | python main.py --template train_vae_search_beta
+   ```
+  
+# Test Set Results
+
+## MovieLens-1m
+
+<img src=Images/ML1m-results.png>
+
+## MovieLens-20m
+
+<img src=Images/ML20m-results.png>
