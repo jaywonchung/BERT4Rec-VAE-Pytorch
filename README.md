@@ -70,6 +70,8 @@ The `NDCG_10` metric shows that the improvement claimed by the paper has been re
   
 # Test Set Results
 
+Numbers under model names indicate the number of hidden layers.
+
 ## MovieLens-1m
 
 <img src=Images/ML1m-results.png>
