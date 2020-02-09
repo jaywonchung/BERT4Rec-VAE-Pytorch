@@ -12,11 +12,11 @@ and lets you train them on MovieLens-1m and MovieLens-20m.
 
 ## Overall
 
-Run `main.py` with arguments to train and/or test you model. There are predefined templates for the following modes.
+Run `main.py` with arguments to train and/or test you model. There are predefined templates for all models.
 
-On running `main.py`, it asks you whether to train on MovieLens-1m or MovieLens-20m. (1/20)
+On running `main.py`, it asks you whether to train on MovieLens-1m or MovieLens-20m. (Enter 1 or 20)
 
-After training, it also asks you whetehr to run test set evaluation on the trained model. (y/n)
+After training, it also asks you whether to run test set evaluation on the trained model. (Enter y or n)
 
 ## BERT4Rec
 
